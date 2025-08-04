@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JSON Test</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; background: #1a1a1a; color: #fff; }
+        .success { color: #4CAF50; }
+        .error { color: #f44336; }
+        .info { color: #2196F3; }
+        pre { background: #333; padding: 15px; border-radius: 5px; overflow-x: auto; }
+        .stats { background: #2a2a2a; padding: 15px; margin: 10px 0; border-radius: 5px; }
+    </style>
+</head>
+<body>
+    <h1>Pagsure.json Test</h1>
+    <div id="status">Loading...</div>
+    <div id="stats"></div>
+    <div id="sample"></div>
+
+    <script>
+        async function testJSON() {
+            const statusDiv = document.getElementById('status');
+            const statsDiv = document.getElementById('stats');
+            const sampleDiv = document.getElementById('sample');
+
+            try {
+                statusDiv.innerHTML = '<span class="info">📡 Fetching pagsure.json...</span>';
+                
+                const response = await fetch('pagsure.json');
+                if (!response.ok) {
+                    throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+                }
+
+                const data = await response.json();
+                statusDiv.innerHTML = '<span class="success">✅ JSON loaded successfully!</span>';
+
+                // Display statistics
+                const categories = data.Categories || [];
+                let totalMovies = 0, totalSeries = 0, totalLive = 0, totalEpisodes = 0;
+
+                categories.forEach(cat => {
+                    const mainCat = cat.MainCategory.toLowerCase();
+                    if (mainCat.includes('movie')) {
+                        totalMovies = cat.Entries.length;
+                    } else if (mainCat.includes('series')) {
+                        totalSeries = cat.Entries.length;
+                        // Count episodes
+                        cat.Entries.forEach(series => {
+                            if (series.Seasons) {
+                                series.Seasons.forEach(season => {
+                                    if (season.Episodes) {
+                                        totalEpisodes += season.Episodes.length;
+                                    }
+                                });
+                            }
+                        });
+                    } else if (mainCat.includes('live')) {
+                        totalLive = cat.Entries.length;
+                    }
+                });
+
+                statsDiv.innerHTML = `
+                    <div class="stats">
+                        <h3>📊 Content Statistics</h3>
+                        <p><strong>Categories:</strong> ${categories.length}</p>
+                        <p><strong>🎬 Movies:</strong> ${totalMovies}</p>
+                        <p><strong>📺 TV Series:</strong> ${totalSeries}</p>
+                        <p><strong>📡 Live TV:</strong> ${totalLive}</p>
+                        <p><strong>🎭 Total Episodes:</strong> ${totalEpisodes}</p>
+                        <p><strong>📦 Total Content Items:</strong> ${totalMovies + totalSeries + totalLive}</p>
+                    </div>
+                `;
+
+                // Show sample data
+                if (categories.length > 0) {
+                    const sampleMovie = categories[0].Entries[0];
+                    sampleDiv.innerHTML = `
+                        <h3>📋 Sample Movie Data</h3>
+                        <pre>${JSON.stringify(sampleMovie, null, 2)}</pre>
+                    `;
+                }
+
+            } catch (error) {
+                statusDiv.innerHTML = `<span class="error">❌ Error: ${error.message}</span>`;
+                console.error('JSON Test Error:', error);
+            }
+        }
+
+        // Run test when page loads
+        document.addEventListener('DOMContentLoaded', testJSON);
+    </script>
+</body>
+</html>
