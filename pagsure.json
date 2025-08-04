@@ -1,0 +1,105 @@
+{
+  "Categories": [
+    {
+      "MainCategory": "Movies",
+      "Entries": [
+        {
+          "Title": "Sample Movie 1",
+          "Description": "This is a sample movie description for testing purposes.",
+          "Poster": "https://movie-fcs.fwh.is/cinecraze/cinecraze.png",
+          "Thumbnail": "https://movie-fcs.fwh.is/cinecraze/cinecraze.png",
+          "Year": "2024",
+          "Rating": "8.5",
+          "Country": "USA",
+          "Genre": "Action",
+          "Servers": [
+            {
+              "Name": "Server 1",
+              "Url": "https://example.com/movie1"
+            }
+          ]
+        },
+        {
+          "Title": "Sample Movie 2",
+          "Description": "Another sample movie for the catalog.",
+          "Poster": "https://movie-fcs.fwh.is/cinecraze/cinecraze.png",
+          "Thumbnail": "https://movie-fcs.fwh.is/cinecraze/cinecraze.png",
+          "Year": "2023",
+          "Rating": "7.8",
+          "Country": "UK",
+          "Genre": "Drama",
+          "Servers": [
+            {
+              "Name": "Server 1",
+              "Url": "https://example.com/movie2"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "MainCategory": "TV Series",
+      "Entries": [
+        {
+          "Title": "Sample Series 1",
+          "Description": "This is a sample TV series description.",
+          "Poster": "https://movie-fcs.fwh.is/cinecraze/cinecraze.png",
+          "Thumbnail": "https://movie-fcs.fwh.is/cinecraze/cinecraze.png",
+          "Year": "2024",
+          "Rating": "9.0",
+          "Country": "USA",
+          "Genre": "Sci-Fi",
+          "SubCategory": "Science Fiction",
+          "Seasons": [
+            {
+              "Season": 1,
+              "Episodes": [
+                {
+                  "Episode": 1,
+                  "Title": "Pilot",
+                  "Description": "The first episode of the series.",
+                  "Servers": [
+                    {
+                      "Name": "Server 1",
+                      "Url": "https://example.com/series1-s1e1"
+                    }
+                  ]
+                },
+                {
+                  "Episode": 2,
+                  "Title": "Episode 2",
+                  "Description": "The second episode of the series.",
+                  "Servers": [
+                    {
+                      "Name": "Server 1",
+                      "Url": "https://example.com/series1-s1e2"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "MainCategory": "Live TV",
+      "Entries": [
+        {
+          "Title": "Sample Live Channel",
+          "Description": "A sample live TV channel.",
+          "Poster": "https://movie-fcs.fwh.is/cinecraze/cinecraze.png",
+          "Thumbnail": "https://movie-fcs.fwh.is/cinecraze/cinecraze.png",
+          "Country": "USA",
+          "Genre": "News",
+          "Servers": [
+            {
+              "Name": "Live Stream",
+              "Url": "https://example.com/live-channel"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
